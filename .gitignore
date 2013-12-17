@@ -2,3 +2,6 @@
 packages
 .project
 pubspec.lock
+*.sublime-project
+*.sublime-workspace
+NOTES
