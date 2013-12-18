@@ -37,16 +37,16 @@ class Board {
     for (int y = 0; y < h; y++) {
       for (int x = 0; x < w; x++) {
         if (blocks[(y * w) + x] == 3) {
-          if (x > 0) neighbourCounts[(x - 1) + y * w]++;
-          if (y > 0) neighbourCounts[x + (y - 1) * w]++;
-          if (x < w - 1) neighbourCounts[(x + 1) + y * w]++;
-          if (y < h - 1) neighbourCounts[x + (y + 1) * w]++;
+          // Bump all neighbouring blocks
+          if (y > 0) neighbourCounts[x + ((y - 1) * w)]++; // North
+          if (x < w - 1) neighbourCounts[(x + 1) + (y * w)]++; // East
+          if (y < h - 1) neighbourCounts[x + ((y + 1) * w)]++; // South
+          if (x > 0) neighbourCounts[(x - 1) + (y * w)]++; // West
 
-          // Diagonal corners
-          if (x > 0 && y > 0) neighbourCounts[(x - 1) + (y - 1) * w]++;
-          if (x > 0 && y < h - 1) neighbourCounts[(x - 1) + (y + 1) * w]++;
-          if (x < w - 1 && y > 0) neighbourCounts[(x + 1) + (y - 1) * w]++;
-          if (x < w - 1 && y < h - 1) neighbourCounts[(x + 1) + (y + 1) * w]++;
+          if (x > 0 && y > 0) neighbourCounts[(x - 1) + ((y - 1) * w)]++; // North West
+          if (x > 0 && y < h - 1) neighbourCounts[(x - 1) + ((y + 1) * w)]++; // South West
+          if (x < w - 1 && y > 0) neighbourCounts[(x + 1) + ((y - 1) * w)]++; // North East
+          if (x < w - 1 && y < h - 1) neighbourCounts[(x + 1) + ((y + 1) * w)]++; // South East
         } // if block = 3
       } // for x < w
     } // for y < h
