@@ -20,13 +20,13 @@ class Board {
   int toggle(int x, int y) {
     if (x < 0 || y < 0 || x >= w || y >= h) return -1;
 
-    blocks[x + y * w] = blocks[x + y * w] == 0 ? 1 : 0;
-    return blocks[x + y * w];
+    blocks[(y * w) + x] = blocks[(y * w) + x] == 0 ? 1 : 0;
+    return blocks[(y * w) + x];
   } // toggle
 
   void set(int x, int y, int val) {
     if (x < 0 || y < 0 || x >= w || y >= h) return;
-    blocks[x + y * w] = val;
+    blocks[(y * w) + x] = val;
   } // set
 
   void tick() {
@@ -36,7 +36,7 @@ class Board {
 
     for (int y = 0; y < h; y++) {
       for (int x = 0; x < w; x++) {
-        if (blocks[x + y * w] == 3) {
+        if (blocks[(y * w) + x] == 3) {
           if (x > 0) neighbourCounts[(x - 1) + y * w]++;
           if (y > 0) neighbourCounts[x + (y - 1) * w]++;
           if (x < w - 1) neighbourCounts[(x + 1) + y * w]++;
@@ -69,7 +69,7 @@ class Board {
       for (int x = 0; x < w; x++) {
         c2d.drawImageScaledFromSource(
             sheet,
-            blocks[x + y * w] * 16,
+            blocks[(y * w) + x] * 16,
             0,
             16,
             16,
